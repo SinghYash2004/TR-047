@@ -1,0 +1,80 @@
+2025-03-15T02:15:00Z INFO [AuthService] login request accepted latency_ms=40
+2025-03-15T02:15:02Z INFO [AuthService] login request accepted latency_ms=41
+2025-03-15T02:15:04Z INFO [AuthService] login request accepted latency_ms=42
+2025-03-15T02:15:06Z INFO [AuthService] login request accepted latency_ms=43
+2025-03-15T02:15:08Z INFO [AuthService] login request accepted latency_ms=44
+2025-03-15T02:15:10Z INFO [AuthService] login request accepted latency_ms=45
+2025-03-15T02:15:12Z INFO [AuthService] login request accepted latency_ms=46
+2025-03-15T02:15:14Z INFO [AuthService] login request accepted latency_ms=47
+2025-03-15T02:15:16Z INFO [AuthService] login request accepted latency_ms=48
+2025-03-15T02:15:18Z INFO [AuthService] login request accepted latency_ms=49
+2025-03-15T02:15:20Z INFO [AuthService] login request accepted latency_ms=50
+2025-03-15T02:15:22Z INFO [AuthService] login request accepted latency_ms=51
+2025-03-15T02:15:24Z INFO [AuthService] login request accepted latency_ms=40
+2025-03-15T02:15:26Z INFO [AuthService] login request accepted latency_ms=41
+2025-03-15T02:15:28Z INFO [AuthService] login request accepted latency_ms=42
+2025-03-15T02:15:30Z INFO [AuthService] login request accepted latency_ms=43
+2025-03-15T02:15:32Z INFO [AuthService] login request accepted latency_ms=44
+2025-03-15T02:15:34Z INFO [AuthService] login request accepted latency_ms=45
+2025-03-15T02:15:36Z INFO [AuthService] login request accepted latency_ms=46
+2025-03-15T02:15:38Z INFO [AuthService] login request accepted latency_ms=47
+2025-03-15T02:15:40Z INFO [AuthService] login request accepted latency_ms=48
+2025-03-15T02:15:42Z INFO [AuthService] login request accepted latency_ms=49
+2025-03-15T02:15:44Z INFO [AuthService] login request accepted latency_ms=50
+2025-03-15T02:15:46Z INFO [AuthService] login request accepted latency_ms=51
+2025-03-15T02:15:48Z INFO [AuthService] login request accepted latency_ms=40
+2025-03-15T02:15:50Z INFO [AuthService] login request accepted latency_ms=41
+2025-03-15T02:15:52Z INFO [AuthService] login request accepted latency_ms=42
+2025-03-15T02:15:54Z INFO [AuthService] login request accepted latency_ms=43
+2025-03-15T02:15:56Z INFO [AuthService] login request accepted latency_ms=44
+2025-03-15T02:15:58Z INFO [AuthService] login request accepted latency_ms=45
+2025-03-15T02:18:10Z WARN [AuthService] retrying database call after slow checkout
+2025-03-15T02:18:12Z WARN [AuthService] retrying database call after slow checkout
+2025-03-15T02:18:14Z WARN [AuthService] retrying database call after slow checkout
+2025-03-15T02:18:16Z WARN [AuthService] retrying database call after slow checkout
+2025-03-15T02:18:18Z WARN [AuthService] retrying database call after slow checkout
+2025-03-15T02:18:20Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:22Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:24Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:26Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:28Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:30Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:32Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:34Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:36Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:38Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:40Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:42Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:44Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:46Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:18:48Z ERROR [AuthService] database timeout during credential lookup
+2025-03-15T02:19:10Z ERROR [AuthService] circuit breaker opened for db dependency
+2025-03-15T02:19:12Z ERROR [AuthService] circuit breaker opened for db dependency
+2025-03-15T02:19:14Z ERROR [AuthService] circuit breaker opened for db dependency
+2025-03-15T02:19:16Z ERROR [AuthService] circuit breaker opened for db dependency
+2025-03-15T02:19:18Z ERROR [AuthService] circuit breaker opened for db dependency
+2025-03-15T02:19:20Z ERROR [AuthService] failing fast user login due to open circuit breaker
+2025-03-15T02:19:22Z ERROR [AuthService] failing fast user login due to open circuit breaker
+2025-03-15T02:19:24Z ERROR [AuthService] failing fast user login due to open circuit breaker
+2025-03-15T02:19:26Z ERROR [AuthService] failing fast user login due to open circuit breaker
+2025-03-15T02:19:28Z ERROR [AuthService] failing fast user login due to open circuit breaker
+2025-03-15T02:27:10Z INFO [AuthService] database dependency recovered request latency_ms=55
+2025-03-15T02:27:11Z INFO [AuthService] database dependency recovered request latency_ms=54
+2025-03-15T02:27:12Z INFO [AuthService] database dependency recovered request latency_ms=53
+2025-03-15T02:27:13Z INFO [AuthService] database dependency recovered request latency_ms=52
+2025-03-15T02:27:14Z INFO [AuthService] database dependency recovered request latency_ms=51
+2025-03-15T02:27:15Z INFO [AuthService] database dependency recovered request latency_ms=50
+2025-03-15T02:27:16Z INFO [AuthService] database dependency recovered request latency_ms=49
+2025-03-15T02:27:17Z INFO [AuthService] database dependency recovered request latency_ms=48
+2025-03-15T02:27:18Z INFO [AuthService] database dependency recovered request latency_ms=47
+2025-03-15T02:27:19Z INFO [AuthService] database dependency recovered request latency_ms=46
+2025-03-15T02:27:20Z INFO [AuthService] database dependency recovered request latency_ms=45
+2025-03-15T02:27:21Z INFO [AuthService] database dependency recovered request latency_ms=44
+2025-03-15T02:27:22Z INFO [AuthService] database dependency recovered request latency_ms=43
+2025-03-15T02:27:23Z INFO [AuthService] database dependency recovered request latency_ms=42
+2025-03-15T02:27:24Z INFO [AuthService] database dependency recovered request latency_ms=41
+2025-03-15T02:27:25Z INFO [AuthService] database dependency recovered request latency_ms=40
+2025-03-15T02:27:26Z INFO [AuthService] database dependency recovered request latency_ms=39
+2025-03-15T02:27:27Z INFO [AuthService] database dependency recovered request latency_ms=38
+2025-03-15T02:27:28Z INFO [AuthService] database dependency recovered request latency_ms=37
+2025-03-15T02:27:29Z INFO [AuthService] database dependency recovered request latency_ms=36
