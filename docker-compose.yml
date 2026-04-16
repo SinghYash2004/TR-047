@@ -1,0 +1,37 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: sqlite+aiosqlite:///./data/incidents.db
+      TMP_DIR: /tmp/incidents
+      ALLOWED_ORIGINS: http://localhost:3000
+    ports:
+      - "8000:8000"
+    volumes:
+      - incident_tmp:/tmp/incidents
+      - incident_db:/app/data
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        API_BASE_URL: http://backend:8000
+    environment:
+      HOSTNAME: 0.0.0.0
+      API_BASE_URL: http://backend:8000
+      NEXT_PUBLIC_API_BASE_URL: ""
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+volumes:
+  incident_tmp:
+  incident_db:

@@ -1,0 +1,6 @@
+2026-04-16T17:27:11.887Z INFO HikariPool-1 - Starting...
+2026-04-16T17:27:12.022Z INFO HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@719962da
+[CORRUPT_LOG_SEGMENT] <<<<< 0x00 0x00 FATAL: connection limit exceeded for non-superusers
+2026-04-16T17:28:01.000Z WARN HikariPool-1 - Connection acquisition timeout after 3000ms
+1970-01-01T00:00:00.000Z ERROR Database reached max_connections (100/100)
+2026-04-16T17:28:03.444Z ERROR { "event": "DB_CRASH", "reason": "exhaustion", "status":
