@@ -24,7 +24,7 @@ def _configured_model() -> str:
 
 class AIProvider(ABC):
     @abstractmethod
-    async def complete(self, prompt: str) -> str:
+    async def complete(self, prompt: str, require_json: bool = False) -> str:
         raise NotImplementedError
 
 
@@ -37,10 +37,14 @@ class GroqProvider(AIProvider):
         else:
             logger.warning("Groq provider is not configured. Set GROQ_API_KEY in backend/.env.")
 
-    async def complete(self, prompt: str) -> str:
+    async def complete(self, prompt: str, require_json: bool = False) -> str:
         if not _configured_api_key() or self._client is None:
             raise RuntimeError("GROQ_API_KEY is not configured. Set a real key in backend/.env before generating reports.")
 
+        kwargs = {}
+        if require_json:
+            kwargs["response_format"] = {"type": "json_object"}
+            
         logger.info("Sending request to Groq model=%s prompt_chars=%s", _configured_model(), len(prompt))
         try:
             response = await self._client.chat.completions.create(
@@ -60,6 +64,7 @@ class GroqProvider(AIProvider):
                 ],
                 temperature=0.1,
                 max_completion_tokens=4096,
+                **kwargs
             )
         except GroqRateLimitError as exc:
             raise RuntimeError(

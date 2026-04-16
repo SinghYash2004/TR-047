@@ -87,7 +87,7 @@ async def _push(state: PipelineState, step: str, status: str, detail: str) -> No
 async def summarize_errors(state: PipelineState) -> PipelineState:
     await _push(state, "summarize", "running", f"Summarizing {len(state['events'])} correlated events")
     prompt = _prompt("summarize_errors.txt", events_json=json.dumps(state["events"], indent=2))
-    state["summaries"] = json.loads(await get_provider().complete(prompt))
+    state["summaries"] = json.loads(await get_provider().complete(prompt, require_json=True))
     await _push(state, "summarize", "done", "Service summaries created")
     return state
 
@@ -95,7 +95,7 @@ async def summarize_errors(state: PipelineState) -> PipelineState:
 async def root_cause_analysis(state: PipelineState) -> PipelineState:
     await _push(state, "rca", "running", "Performing root cause analysis")
     prompt = _prompt("root_cause_analysis.txt", summaries_json=json.dumps(state["summaries"], indent=2), readme=state["readme"] or "No additional context provided.")
-    raw_payload = json.loads(await get_provider().complete(prompt))
+    raw_payload = json.loads(await get_provider().complete(prompt, require_json=True))
     state["rca"] = RCAOutput.model_validate(
         _normalize_rca_payload(raw_payload, state["events"])
     ).model_dump(mode="json")

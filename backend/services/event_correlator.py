@@ -33,6 +33,8 @@ class CorrelationResult(BaseModel):
 
 def correlate_events(events: list[LogEvent], start: datetime, end: datetime) -> CorrelationResult:
     filtered = sorted((e for e in events if start <= e.timestamp <= end), key=lambda e: e.timestamp)
+    if not filtered and events:
+        filtered = sorted(events, key=lambda e: e.timestamp)
     groups: dict[str, list[LogEvent]] = defaultdict(list)
     for event in filtered:
         groups[event.service].append(event)
