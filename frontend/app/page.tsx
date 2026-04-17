@@ -53,54 +53,6 @@ type ApiReportResponse = {
   source_count: number;
 };
 
-const demoReport: ReportState = {
-  timeline: [
-    {
-      time: "09:14:03",
-      title: "Latency spike detected on API gateway",
-      detail: "Application logs show rising request queue depth and 5xx responses from checkout.",
-      source: "app.log"
-    },
-    {
-      time: "09:16:18",
-      title: "Database connection pool saturation",
-      detail: "DB logs record repeated timeout errors after a burst of long-running inventory queries.",
-      source: "db.log"
-    },
-    {
-      time: "09:18:41",
-      title: "Autoscaling lag increased error rate",
-      detail: "Server metrics indicate CPU saturation and delayed pod scale-up during the incident window.",
-      source: "server-metrics.log"
-    },
-    {
-      time: "09:24:12",
-      title: "Recovery initiated",
-      detail: "Traffic normalized after query cancellation and manual pool reset on the database tier.",
-      source: "ops-notes"
-    }
-  ],
-  rootCause:
-    "A slow inventory query cascade exhausted the database connection pool, which propagated upstream as gateway latency and checkout failures before autoscaling could absorb traffic.",
-  confidence: 0.89,
-  impact: {
-    services: ["Checkout API", "Inventory Service", "Customer Dashboard"],
-    downtime: "10 minutes full degradation, 18 minutes elevated latency",
-    severity: "SEV-2"
-  },
-  postmortem: {
-    summary:
-      "The platform experienced a transactional slowdown caused by a query storm in the inventory database. Automated scaling reacted too slowly, amplifying customer-facing failures in checkout flows.",
-    rca:
-      "The most probable failure chain begins with unbounded inventory reads, continues into database pool exhaustion, and culminates in application timeouts across dependent services.",
-    actions: [
-      "Add circuit breaking and query timeout guards for inventory lookups.",
-      "Pre-warm database connection pools during traffic surges.",
-      "Create alerting on queue depth, timeout bursts, and scale-out lag correlation."
-    ]
-  }
-};
-
 function formatTimestamp(value: string) {
   if (!value) {
     return "Not selected";
@@ -140,7 +92,7 @@ export default function Home() {
     "Customer requests pass through an API gateway to Node.js services, PostgreSQL, Redis cache, and a Kubernetes-hosted worker tier."
   );
   const [isGenerating, setIsGenerating] = useState(false);
-  const [report, setReport] = useState<ReportState | null>(demoReport);
+  const [report, setReport] = useState<ReportState | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
 
   const totalFilesSize = useMemo(
@@ -223,7 +175,7 @@ export default function Home() {
           ? error.message
           : "Unable to reach the backend. Make sure the API server is running."
       );
-      setReport(demoReport);
+      setReport(null);
     } finally {
       setIsGenerating(false);
     }
@@ -400,11 +352,11 @@ export default function Home() {
         <div className="space-y-6">
           <Panel title="Correlated Timeline" subtitle="Events leading to the incident">
             <div className="space-y-5">
-              {report?.timeline.map((event, index) => (
+              {report?.timeline?.map((event, index) => (
                 <div key={`${event.time}-${index}`} className="flex gap-4">
                   <div className="flex flex-col items-center">
                     <div className="h-3 w-3 rounded-full bg-signal shadow-[0_0_0_6px_rgba(94,234,212,0.12)]" />
-                    {index !== report.timeline.length - 1 ? (
+                    {index !== (report?.timeline?.length ?? 0) - 1 ? (
                       <div className="mt-2 h-full w-px bg-gradient-to-b from-signal/50 to-transparent" />
                     ) : null}
                   </div>
@@ -440,10 +392,10 @@ export default function Home() {
               <div className="space-y-4">
                 <InfoRow
                   label="Affected services"
-                  value={report?.impact.services.join(", ") ?? "Not available"}
+                  value={report?.impact?.services?.join(", ") ?? "Not available"}
                 />
-                <InfoRow label="Estimated downtime" value={report?.impact.downtime ?? "Not available"} />
-                <InfoRow label="Severity" value={report?.impact.severity ?? "Not available"} />
+                <InfoRow label="Estimated downtime" value={report?.impact?.downtime ?? "Not available"} />
+                <InfoRow label="Severity" value={report?.impact?.severity ?? "Not available"} />
               </div>
             </Panel>
           </div>
@@ -452,23 +404,27 @@ export default function Home() {
             <div className="grid gap-4 lg:grid-cols-2">
               <PostmortemCard
                 heading="Summary"
-                content={report?.postmortem.summary ?? "No summary available yet."}
+                content={report?.postmortem?.summary ?? "No summary available yet."}
               />
               <PostmortemCard
                 heading="RCA"
-                content={report?.postmortem.rca ?? "No root cause narrative available yet."}
+                content={report?.postmortem?.rca ?? "No root cause narrative available yet."}
               />
               <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5 lg:col-span-2">
                 <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Action items</p>
                 <div className="mt-4 grid gap-3">
-                  {report?.postmortem.actions.map((action) => (
+                  {report?.postmortem?.actions?.map((action) => (
                     <div
                       key={action}
                       className="rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-slate-200"
                     >
                       {action}
                     </div>
-                  ))}
+                  )) ?? (
+                    <div className="rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-slate-500">
+                      No action items available yet.
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
